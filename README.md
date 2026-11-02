@@ -23,6 +23,7 @@ publishedResults目前保持空白；核定後再填公開得獎名單。完整�
 - style.css：網頁樣式
 - public.js：篩選及內容呈現
 - data.js：競賽項目與公開資料
+- 115競賽辦法原文.pdf：學校原始辦法的PDF下載版
 - 115競賽辦法原文.doc：學校提供之原始辦法
 - .nojekyll：以靜態檔案直接發布
 
