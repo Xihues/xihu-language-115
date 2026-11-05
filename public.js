@@ -1,5 +1,11 @@
 'use strict';
 const C=window.CONTEST;
+// Keep section links below the header, including when the menu wraps on phones.
+if(typeof ResizeObserver==='function'){
+ const siteHeader=document.querySelector('header');
+ const updateHeaderHeight=()=>document.documentElement.style.setProperty('--site-header-height',Math.ceil(siteHeader.getBoundingClientRect().height)+'px');
+ updateHeaderHeight();new ResizeObserver(updateHeaderHeight).observe(siteHeader);
+}
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const roc=d=>{const x=new Date(d+'T00:00:00');return `${x.getFullYear()-1911}/${x.getMonth()+1}/${x.getDate()}（${'日一二三四五六'[x.getDay()]}）`;};
 function renderDates(rows){document.querySelector('#dateCards').innerHTML=[1,2].map(t=>{const dates=[...new Set(rows.filter(e=>e.term===t).map(e=>e.date))];return `<div><h3>${t===1?'上':'下'}學期</h3>${dates.map(date=>`<article class="date-card"><h3>${roc(date)}</h3>${rows.filter(e=>e.date===date).map(e=>`<p><strong>${esc(e.name)}</strong><small>${esc(e.time)} · ${esc(e.venue)} · ${e.grades.join('、')}年級</small></p>`).join('')}</article>`).join('')||'<p>此篩選沒有項目。</p>'}</div>`;}).join('');}
